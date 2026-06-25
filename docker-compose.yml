@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: dailyflow-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: dailyflow
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - dailyflow-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dailyflow-backend
+    ports:
+      - "5000:5000"
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/dailyflow
+      JWT_SECRET: your-jwt-secret-key-change-this-in-production
+      NODE_ENV: development
+    depends_on:
+      - mongodb
+    networks:
+      - dailyflow-network
+    volumes:
+      - ./backend/src:/app/src
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dailyflow-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000/api
+      NEXTAUTH_URL: http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - dailyflow-network
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  mongo_data:
+
+networks:
+  dailyflow-network:
+    driver: bridge
