@@ -15,7 +15,12 @@ dotenv.config();
 
 const app = express();
 const PORT = parseInt(process.env.PORT ?? "5000", 10);
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/dailyflow";
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  console.error("❌ MONGODB_URI environment variable is missing!");
+  process.exit(1);
+}
 
 // Middleware
 app.use(helmet());
