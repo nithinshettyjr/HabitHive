@@ -2,9 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // NOTE: Remove 'standalone' when deploying to Vercel.
-  // Only use output: 'standalone' for Docker/Render deployments.
-  // output: "standalone",
+  // Required for Docker/Render deployment
+  output: "standalone",
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
