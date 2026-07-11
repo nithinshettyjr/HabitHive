@@ -1,25 +1,37 @@
 export const calculateStreak = (completedDates: Date[]): number => {
-  if (completedDates.length === 0) return 0;
+  if (!completedDates || completedDates.length === 0) return 0;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const formatYMD = (d: Date) => {
+    const date = new Date(d);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  };
+
+  const completedDateStrings = completedDates.map((d) => formatYMD(d));
+
+  const todayStr = formatYMD(today);
+  const yesterdayStr = formatYMD(yesterday);
+
+  const hasActiveStreak =
+    completedDateStrings.includes(todayStr) ||
+    completedDateStrings.includes(yesterdayStr);
+
+  if (!hasActiveStreak) {
+    return 0;
+  }
+
   let streak = 0;
-  let currentDate = new Date(today);
+  const startFromToday = completedDateStrings.includes(todayStr);
+  let currentDate = startFromToday ? new Date(today) : yesterday;
 
-  while (true) {
-    const dateStr = currentDate.toISOString().split("T")[0];
-    const isCompleted = completedDates.some(
-      (d) => new Date(d).toISOString().split("T")[0] === dateStr
-    );
-
-    if (!isCompleted && streak === 0) {
-      // If today is not completed and we haven't started counting, move to yesterday
-      currentDate.setDate(currentDate.getDate() - 1);
-      continue;
-    }
-
-    if (isCompleted) {
+  for (let i = 0; i < 365; i++) {
+    const checkStr = formatYMD(currentDate);
+    if (completedDateStrings.includes(checkStr)) {
       streak++;
       currentDate.setDate(currentDate.getDate() - 1);
     } else {

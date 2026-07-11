@@ -4,6 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #F1F5F9;
+    --bg-card: #FFFFFF;
+    --bg-hover: #EEF2FF;
+    --border-color: #E2E8F0;
+    
+    --text-heading: #111827;
+    --text-subheading: #1F2937;
+    --text-body: #374151;
+    --text-secondary: #6B7280;
+  }
+
+  .dark {
+    --bg-primary: #0F172A;
+    --bg-secondary: #111827;
+    --bg-card: #1E293B;
+    --bg-hover: rgba(79, 70, 229, 0.1);
+    --border-color: #334155;
+    
+    --text-heading: #FFFFFF;
+    --text-subheading: #F1F5F9;
+    --text-body: #E5E7EB;
+    --text-secondary: #CBD5E1;
+  }
+}
+
 * {
   @apply m-0 p-0 box-border;
 }
@@ -13,7 +41,20 @@ html {
 }
 
 body {
-  @apply bg-background dark:bg-background-dark text-gray-900 dark:text-gray-100 font-inter;
+  @apply text-body font-inter antialiased leading-relaxed;
+  background-color: #F8FAFC;
+  background-image: url('/images/bg_home.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background-image 0.4s ease, background-color 0.4s ease;
+}
+
+/* Dark mode body */
+.dark body {
+  background-color: #0a0e1a;
+  background-image: url('/images/bg_dark_mode.png');
 }
 
 h1,
@@ -22,16 +63,16 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-poppins font-semibold;
+  @apply font-poppins font-bold text-heading tracking-tight;
 }
 
 /* Glassmorphism Effect */
 .glass {
-  @apply bg-white/30 dark:bg-gray-800/30 backdrop-blur-md border border-white/20 dark:border-gray-700/30;
+  @apply bg-white/30 dark:bg-[#1E293B]/30 backdrop-blur-md border border-white/20 dark:border-[#334155]/30;
 }
 
 .glass-light {
-  @apply bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl border border-white/30 dark:border-gray-700/40;
+  @apply bg-white/50 dark:bg-[#1E293B]/50 backdrop-blur-xl border border-white/30 dark:border-[#334155]/40;
 }
 
 /* Smooth Transitions */
@@ -58,39 +99,43 @@ h6 {
 
 /* Button Styles */
 .btn-primary {
-  @apply bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-semibold transition-smooth;
+  @apply bg-gradient-to-r from-primary to-indigo-500 hover:from-indigo-600 hover:to-indigo-500 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border-none;
 }
 
 .btn-secondary {
-  @apply bg-secondary hover:bg-secondary/90 text-white px-6 py-2 rounded-lg font-semibold transition-smooth;
+  @apply bg-card hover:bg-surface-hover text-primary px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 border border-primary hover:shadow-md hover:-translate-y-0.5;
 }
 
 .btn-ghost {
-  @apply bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100 px-6 py-2 rounded-lg font-semibold transition-smooth;
+  @apply bg-transparent hover:bg-surface-hover text-heading px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-0.5;
+}
+
+/* Form Styles */
+.input-field {
+  @apply w-full bg-card border border-border text-heading px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 placeholder:text-muted;
 }
 
 /* Badge Styles */
 .badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold;
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border;
 }
 
 .badge-primary {
-  @apply badge bg-primary/10 text-primary;
+  @apply badge bg-primary/10 text-primary border-primary/20;
 }
 
 .badge-success {
-  @apply badge bg-secondary/10 text-secondary;
+  @apply badge bg-secondary/10 text-secondary border-secondary/20;
 }
 
 .badge-warning {
-  @apply badge bg-accent/10 text-accent;
+  @apply badge bg-accent/10 text-accent border-accent/20;
 }
 
 /* Card Styles */
 .card {
-  @apply glass rounded-2xl p-6 transition-smooth hover:shadow-lg;
+  @apply bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] dark:shadow-none rounded-[20px] p-7 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-border hover:-translate-y-1;
 }
-
 /* Grid Animations */
 @keyframes shimmer {
   0% {
@@ -110,4 +155,91 @@ h6 {
     rgba(255, 255, 255, 0) 40%
   );
   background-size: 1000px 100%;
+}
+
+/* ============================================
+   Per-Page Background Utility Classes
+   Apply to the outermost wrapper of each page
+   ============================================ */
+
+/* Home / Landing */
+.bg-page-home {
+  background-image: url('/images/bg_home.png') !important;
+}
+.dark .bg-page-home {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Dashboard */
+.bg-page-dashboard {
+  background-image: url('/images/bg_dashboard.png') !important;
+}
+.dark .bg-page-dashboard {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Analytics */
+.bg-page-analytics {
+  background-image: url('/images/bg_analytics.png') !important;
+}
+.dark .bg-page-analytics {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Habits */
+.bg-page-habits {
+  background-image: url('/images/bg_habits.png') !important;
+}
+.dark .bg-page-habits {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Achievements */
+.bg-page-achievements {
+  background-image: url('/images/bg_achievements.png') !important;
+}
+.dark .bg-page-achievements {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Journal */
+.bg-page-journal {
+  background-image: url('/images/bg_journal.png') !important;
+}
+.dark .bg-page-journal {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Profile */
+.bg-page-profile {
+  background-image: url('/images/bg_profile.png') !important;
+}
+.dark .bg-page-profile {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Settings */
+.bg-page-settings {
+  background-image: url('/images/bg_settings.png') !important;
+}
+.dark .bg-page-settings {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* AI Coach / Suggestions */
+.bg-page-ai {
+  background-image: url('/images/bg_ai_coach.png') !important;
+}
+.dark .bg-page-ai {
+  background-image: url('/images/bg_dark_mode.png') !important;
+}
+
+/* Shared page wrapper — ensures bg fills full viewport */
+.page-wrapper {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background-image 0.4s ease;
 }

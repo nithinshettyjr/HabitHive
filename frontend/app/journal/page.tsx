@@ -21,7 +21,7 @@ export default function Journal() {
   }
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background-dark">
+    <div className="min-h-screen bg-journal-pattern dark:bg-dark-pattern bg-cover bg-center bg-fixed bg-no-repeat">
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -29,7 +29,7 @@ export default function Journal() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold mb-2">Habit Hive</h1>
-            <p className="text-gray-600 dark:text-gray-400">Reflect on your day and track your thoughts</p>
+            <p className="text-muted">Reflect on your day and track your thoughts</p>
           </div>
           <button className="btn-primary flex items-center space-x-2">
             <FiPlus /> New Entry
@@ -43,7 +43,7 @@ export default function Journal() {
             <input
               type="text"
               placeholder="Search entries..."
-              className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-card border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <button className="btn-ghost flex items-center space-x-2">
@@ -81,12 +81,12 @@ export default function Journal() {
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <span className="text-2xl">{entry.mood}</span>
-                    <span className="text-xs text-gray-600 dark:text-gray-400">{entry.date} • {entry.time}</span>
+                    <span className="text-xs text-muted">{entry.date} • {entry.time}</span>
                   </div>
                   <h3 className="text-lg font-semibold">{entry.title}</h3>
                 </div>
               </div>
-              <p className="text-gray-600 dark:text-gray-400">{entry.excerpt}</p>
+              <p className="text-muted">{entry.excerpt}</p>
               <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <button className="text-primary font-semibold text-sm hover:underline">Read More →</button>
               </div>
@@ -101,7 +101,7 @@ export default function Journal() {
             {Array.from({ length: 7 }).map((_, i) => {
               const moods = ["😊", "🙏", "😴", "😊", "😊", "🤔", "😊"];
               return (
-                <div key={i} className="aspect-square flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg text-2xl hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+                <div key={i} className="aspect-square flex items-center justify-center bg-gray-100 dark:bg-card rounded-lg text-2xl hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors">
                   {moods[i]}
                 </div>
               );

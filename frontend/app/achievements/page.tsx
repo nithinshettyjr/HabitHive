@@ -22,14 +22,14 @@ export default function Achievements() {
   }
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background-dark">
+    <div className="min-h-screen bg-achievements-pattern dark:bg-dark-pattern bg-cover bg-center bg-fixed bg-no-repeat">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Achievements & Milestones</h1>
-          <p className="text-gray-600 dark:text-gray-400">Celebrate your progress and unlock new achievements</p>
+          <p className="text-muted">Celebrate your progress and unlock new achievements</p>
         </div>
 
         {/* Achievement Stats */}
@@ -39,7 +39,7 @@ export default function Achievements() {
               <FiAward className="text-accent" size={32} />
               <span className="badge badge-success">8/12</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">Achievements Unlocked</p>
+            <p className="text-muted mb-2">Achievements Unlocked</p>
             <p className="text-3xl font-bold">8</p>
           </div>
           <div className="card">
@@ -47,7 +47,7 @@ export default function Achievements() {
               <FiZap className="text-secondary" size={32} />
               <span className="badge badge-secondary">Active</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">Current Longest Streak</p>
+            <p className="text-muted mb-2">Current Longest Streak</p>
             <p className="text-3xl font-bold">45 days</p>
           </div>
           <div className="card">
@@ -55,7 +55,7 @@ export default function Achievements() {
               <FiTrendingUp className="text-primary" size={32} />
               <span className="badge badge-primary">↑ 12%</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">Overall Progress</p>
+            <p className="text-muted mb-2">Overall Progress</p>
             <p className="text-3xl font-bold">78%</p>
           </div>
         </div>
@@ -80,10 +80,10 @@ export default function Achievements() {
                   <div className="text-3xl">{item.icon}</div>
                   <div>
                     <p className="font-semibold">{item.title}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
+                    <p className="text-sm text-muted">{item.description}</p>
                   </div>
                 </div>
-                <span className="text-xs text-gray-600 dark:text-gray-400">{item.date}</span>
+                <span className="text-xs text-muted">{item.date}</span>
               </div>
             ))}
           </div>

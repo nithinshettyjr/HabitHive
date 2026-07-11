@@ -10,6 +10,9 @@ import {
   CompletionChart,
   ConsistencyChart,
   CategoryChart,
+  MonthlyConsistencyBarChart,
+  HeatmapChart,
+  DayOfWeekChart,
 } from "@/components/Charts";
 import { FiDownload, FiTrendingUp, FiCheckCircle, FiAward, FiActivity } from "react-icons/fi";
 
@@ -126,22 +129,37 @@ export default function Analytics() {
   }
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background-dark">
+    <div className="min-h-screen bg-analytics-pattern dark:bg-dark-pattern bg-cover bg-center bg-fixed bg-no-repeat">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-bold mb-2">Analytics</h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-muted">
               Your real habit performance — derived from your actual data
             </p>
           </div>
           <button
             className="btn-primary flex items-center space-x-2"
-            onClick={() => window.print()}
+            onClick={() => {
+              const rows = [
+                ["Habit", "Category", "Streak", "Total Completions", "Completed Dates"],
+                ...habits.map((h: any) => [
+                  h.name, h.category, h.streak ?? 0,
+                  (h.completedDates || []).length,
+                  (h.completedDates || []).join(" | "),
+                ]),
+              ];
+              const csv = rows.map((r) => r.map((c: any) => `"${c}"`).join(",")).join("\n");
+              const blob = new Blob([csv], { type: "text/csv" });
+              const a = document.createElement("a");
+              a.href = URL.createObjectURL(blob);
+              a.download = `habithive-report-${new Date().toISOString().slice(0,10)}.csv`;
+              a.click();
+            }}
           >
-            <FiDownload /> Export Report
+            <FiDownload /> Export CSV
           </button>
         </div>
 
@@ -188,23 +206,34 @@ export default function Analytics() {
                 <div key={index} className="card">
                   <div className="flex items-center gap-2 mb-2">
                     {metric.icon}
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    <p className="text-muted text-sm">
                       {metric.label}
                     </p>
                   </div>
                   <p className="text-2xl font-bold mb-1 truncate">{metric.value}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{metric.sub}</p>
+                  <p className="text-xs text-muted">{metric.sub}</p>
                 </div>
               ))}
             </div>
 
-            {/* Charts */}
+            {/* Monthly Consistency Bar Chart — full width hero */}
+            <div className="mb-8">
+              <MonthlyConsistencyBarChart habits={habits} />
+            </div>
+
+            {/* Heatmap — full width */}
+            <div className="mb-8">
+              <HeatmapChart habits={habits} />
+            </div>
+
+            {/* Charts grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               <HabitChart habits={habits} />
               <CompletionChart habits={habits} />
-              <ConsistencyChart habits={habits} />
+              <DayOfWeekChart habits={habits} />
               <StreakChart habits={habits} />
-              <div className="lg:col-span-2">
+              <ConsistencyChart habits={habits} />
+              <div className="lg:col-span-1">
                 <CategoryChart habits={habits} />
               </div>
             </div>
@@ -213,7 +242,7 @@ export default function Analytics() {
             <div className="card">
               <h2 className="text-2xl font-bold mb-6">Top Performing Habits</h2>
               {topHabits.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 text-center py-8">
+                <p className="text-muted text-center py-8">
                   No habits yet. Create habits and start tracking to see your top performers!
                 </p>
               ) : (
@@ -225,7 +254,7 @@ export default function Analytics() {
                     >
                       <div>
                         <p className="font-semibold">{habit.name}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-muted">
                           {habit.category} · {habit.streak} day streak
                         </p>
                       </div>

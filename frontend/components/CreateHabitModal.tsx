@@ -50,7 +50,7 @@ export function CreateHabitModal({ isOpen, onClose, onSubmit, submitting = false
       <div className="card w-full max-w-md">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Create New Habit</h2>
-          <button onClick={onClose} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+          <button onClick={onClose} className="p-1 hover:bg-surface-hover rounded transition-colors text-muted hover:text-heading">
             <FiX size={24} />
           </button>
         </div>
@@ -66,7 +66,7 @@ export function CreateHabitModal({ isOpen, onClose, onSubmit, submitting = false
                 setFormData({ ...formData, name: e.target.value })
               }
               placeholder="e.g., Morning Exercise"
-              className="w-full px-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="input-field"
               required
             />
           </div>
@@ -79,7 +79,7 @@ export function CreateHabitModal({ isOpen, onClose, onSubmit, submitting = false
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              className="w-full px-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="input-field"
             >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
@@ -99,7 +99,7 @@ export function CreateHabitModal({ isOpen, onClose, onSubmit, submitting = false
               }
               placeholder="Why is this habit important to you?"
               rows={3}
-              className="w-full px-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              className="input-field resize-none"
             />
           </div>
 
@@ -112,10 +112,10 @@ export function CreateHabitModal({ isOpen, onClose, onSubmit, submitting = false
                   key={color}
                   type="button"
                   onClick={() => setFormData({ ...formData, color })}
-                  className={`w-8 h-8 rounded-lg border-2 ${
+                  className={`w-8 h-8 rounded-full border-[3px] transition-transform ${
                     formData.color === color
-                      ? "border-gray-800 dark:border-white"
-                      : "border-transparent"
+                      ? "border-white shadow-[0_0_0_2px_#374151] dark:shadow-[0_0_0_2px_white] scale-110"
+                      : "border-transparent hover:scale-110"
                   }`}
                   style={{ backgroundColor: color }}
                 />

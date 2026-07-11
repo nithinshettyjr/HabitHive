@@ -58,12 +58,12 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 dark:from-background-dark dark:via-background-dark dark:to-primary/10 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-hero-pattern dark:bg-dark-pattern bg-cover bg-center bg-fixed bg-no-repeat flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="card">
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold mb-2">Create Account</h1>
-            <p className="text-gray-600 dark:text-gray-400">Join DailyFlow and start building habits</p>
+            <p className="text-muted">Join DailyFlow and start building habits</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -82,7 +82,7 @@ export default function SignUp() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="input-field pl-11 py-3"
                   required
                 />
               </div>
@@ -97,7 +97,7 @@ export default function SignUp() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="input-field pl-11 py-3"
                   required
                 />
               </div>
@@ -112,7 +112,7 @@ export default function SignUp() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="input-field pl-11 py-3"
                   required
                 />
               </div>
@@ -127,7 +127,7 @@ export default function SignUp() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="input-field pl-11 py-3"
                   required
                 />
               </div>
@@ -145,13 +145,13 @@ export default function SignUp() {
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <button
               onClick={() => signIn("google")}
-              className="w-full py-2 px-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 font-semibold transition-smooth"
+              className="w-full py-3 px-4 border border-border rounded-xl hover:bg-surface-hover font-semibold transition-all duration-200 flex justify-center items-center gap-2 text-heading"
             >
               Sign up with Google
             </button>
           </div>
 
-          <p className="mt-6 text-center text-gray-600 dark:text-gray-400">
+          <p className="mt-6 text-center text-muted">
             Already have an account?{" "}
             <Link href="/auth/signin" className="text-primary font-semibold hover:underline">
               Sign in

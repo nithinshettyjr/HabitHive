@@ -20,7 +20,7 @@ export function AchievementCard({ title, description, icon, achieved, progress }
         {achieved && <span className="badge-success">Unlocked</span>}
       </div>
       <h3 className="text-lg font-semibold mb-1">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{description}</p>
+      <p className="text-sm text-muted mb-3">{description}</p>
       
       {progress !== undefined && !achieved && (
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">

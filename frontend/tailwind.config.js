@@ -10,10 +10,32 @@ module.exports = {
     extend: {
       colors: {
         primary: "#4F46E5",
-        secondary: "#22C55E",
+        secondary: "#10B981",
         accent: "#F59E0B",
-        background: "#F8FAFC",
-        "background-dark": "#0F172A",
+        
+        background: "var(--bg-primary)",
+        "background-dark": "var(--bg-primary)",
+        "bg-secondary": "var(--bg-secondary)",
+        card: "var(--bg-card)",
+        border: "var(--border-color)",
+        "surface-hover": "var(--bg-hover)",
+        
+        heading: "var(--text-heading)",
+        subheading: "var(--text-subheading)",
+        body: "var(--text-body)",
+        muted: "var(--text-secondary)",
+      },
+      backgroundImage: {
+        "hero-pattern": "url('/images/bg_home.png')",
+        "dashboard-pattern": "url('/images/bg_dashboard.png')",
+        "dark-pattern": "url('/images/bg_dark_mode.png')",
+        "analytics-pattern": "url('/images/bg_analytics.png')",
+        "ai-pattern": "url('/images/bg_ai_coach.png')",
+        "habits-pattern": "url('/images/bg_habits.png')",
+        "achievements-pattern": "url('/images/bg_achievements.png')",
+        "profile-pattern": "url('/images/bg_profile.png')",
+        "journal-pattern": "url('/images/bg_journal.png')",
+        "settings-pattern": "url('/images/bg_settings.png')",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

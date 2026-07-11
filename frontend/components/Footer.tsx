@@ -13,7 +13,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg" />
               <span>HabitHive</span>
             </Link>
-            <div className="space-y-3 text-gray-600 dark:text-gray-400 text-sm">
+            <div className="space-y-3 text-muted text-sm">
               <p className="flex items-center gap-2 hover:text-primary transition-smooth">
                 <span className="text-base">📍</span> Bengaluru, Karnataka, India
               </p>
@@ -36,8 +36,8 @@ export default function Footer() {
 
           {/* Follow Us Column */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 font-poppins">Follow Us</h3>
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm text-gray-600 dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-heading font-poppins">Follow Us</h3>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm text-muted">
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -79,7 +79,7 @@ export default function Footer() {
 
         {/* Divider & Copyright */}
         <div className="border-t border-gray-200/50 dark:border-gray-800/50 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-muted">
             © 2026 HabitHive. All Rights Reserved.
           </p>
         </div>
