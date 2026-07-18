@@ -2,44 +2,19 @@ services:
   # ── Backend API (Express + TypeScript) ───────────────────────────────────────
   - type: web
     name: habithive-backend
-    runtime: docker
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: node dist/server.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 5000
+      # PORT is NOT set here — Render injects it automatically
       - key: MONGODB_URI
         sync: false   # Set this manually in Render dashboard (contains password)
       - key: JWT_SECRET
         generateValue: true   # Render auto-generates a secure random value
       - key: CLIENT_URL
-        fromService:
-          name: habithive-frontend
-          type: web
-          property: host
-          envVarKey: RENDER_EXTERNAL_URL
+        value: https://habit-hive-one.vercel.app
     healthCheckPath: /api/health
-    autoDeploy: true
-
-  # ── Frontend (Next.js) ────────────────────────────────────────────────────────
-  - type: web
-    name: habithive-frontend
-    runtime: docker
-    dockerfilePath: ./frontend/Dockerfile
-    dockerContext: ./frontend
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: NEXTAUTH_SECRET
-        generateValue: true   # Render auto-generates a secure random value
-      - key: NEXTAUTH_URL
-        sync: false   # Set to: https://habithive-frontend.onrender.com
-      - key: NEXT_PUBLIC_API_URL
-        sync: false   # Set to: https://habithive-backend.onrender.com/api
-      - key: GOOGLE_CLIENT_ID
-        sync: false   # Set from Google Cloud Console
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false   # Set from Google Cloud Console
     autoDeploy: true
