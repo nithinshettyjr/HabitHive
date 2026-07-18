@@ -18,7 +18,7 @@ const PORT = parseInt(process.env.PORT ?? "5000", 10);
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-  console.error("❌ MONGODB_URI environment variable is missing!");
+  console.error("❌ MONGODB_URI environment variable is missing! Set it in Render dashboard.");
   process.exit(1);
 }
 
@@ -83,7 +83,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT} (process.env.PORT=${process.env.PORT})`);
 });
 
 server.on('error', (err: any) => {
